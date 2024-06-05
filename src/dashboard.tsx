@@ -79,14 +79,7 @@ useEffect(() => {
           >
             Şehir Işıkları
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Users
-              </Button>
-            
-          </Box>
+    
         </Toolbar>
       </Container>
     </AppBar>
