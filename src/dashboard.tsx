@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {useEffect, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import SupervisedUserCircleSharpIcon from '@mui/icons-material/SupervisedUserCircleSharp';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 
@@ -134,7 +132,6 @@ useEffect(() => {
           onRowsPerPageChange={handleRowsPerPage}
         ></TablePagination>
       </Paper>
-     
     </div>
       {selectedRow  && <UserDetailForm selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
       }    
