@@ -34,6 +34,7 @@ function Dashboard() {
     console.log(row);
     setOpen(true)
   }
+
   const handlechangepage = (event: React.MouseEvent<HTMLButtonElement> | null, newpage: number) => {
     pagechange(newpage);
   };
@@ -52,6 +53,7 @@ useEffect(() => {
   .then(resp => {rowchange(resp);})
   .catch(e => {console.log(e.message)})
 }, [])
+
 
   return (
     <div className='content'>
