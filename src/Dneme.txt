@@ -10,7 +10,6 @@ import SupervisedUserCircleSharpIcon from '@mui/icons-material/SupervisedUserCir
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 
 import './dashboard.css'
-import UserDetailForm from './formModal/userDetailForm';
 
 interface Column {
   id: string;
@@ -19,23 +18,14 @@ interface Column {
 
 
 function Dashboard() {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const [selectedRow, setSelectedRow] = useState(null);
-  // const [modalOpen, setModalOpen] = useState({});
-
   const columns: Column[] = [
     { id: 'id', name: 'Id' },
     { id: 'name', name: 'Name' },
     { id: 'email', name: 'Email' },
     { id: 'phone', name: 'Phone' },
+    { id: 'details', name: 'Details' }
 
   ];
-  const handleModal=(row:any)=>{
-    setSelectedRow(row)
-    console.log(row);
-    setOpen(true)
-  }
   const handlechangepage = (event: React.MouseEvent<HTMLButtonElement> | null, newpage: number) => {
     pagechange(newpage);
   };
@@ -54,7 +44,7 @@ useEffect(() => {
   .then(resp => {rowchange(resp);})
   .catch(e => {console.log(e.message)})
 }, [])
-
+ 
   return (
     <div className='content'>
       <div className='navbar'>
@@ -115,10 +105,7 @@ useEffect(() => {
                   .slice(page * rowperpage, page * rowperpage + rowperpage)
                   .map((row, i) => {
                     return (
-                      <TableRow key={i}
-                      onClick={() => handleModal(row)}
-                      sx={{ cursor: 'pointer' }}
-                      >
+                      <TableRow key={i}>
                         {columns &&
                           columns.map((column, i) => {
                             let value = row[column.id];
@@ -127,8 +114,11 @@ useEffect(() => {
                       </TableRow>
 
                     );
+                    
                   })}
+                  
             </TableBody>
+            
           </Table>
         </TableContainer>
         <TablePagination
@@ -141,10 +131,8 @@ useEffect(() => {
           onRowsPerPageChange={handleRowsPerPage}
         ></TablePagination>
       </Paper>
-     
     </div>
-      {selectedRow  && <UserDetailForm selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
-      }    
+
     </div>
 
   );

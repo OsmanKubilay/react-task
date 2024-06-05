@@ -1,11 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Dashboard from './dashboard';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Dashboard from './dashboard';
 function App() {
   return (
     <div className="App">
+      {/* useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+      }, []) */}
       <BrowserRouter>
     
           <Routes>
