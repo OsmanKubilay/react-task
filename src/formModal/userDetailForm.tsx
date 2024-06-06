@@ -41,8 +41,6 @@ interface Column {
   name: string;
 } 
 
-
-
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
   return (
@@ -100,43 +98,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
     pagechange(0);
   };
 
-  // const postUrl = `https://jsonplaceholder.typicode.com/users/${selectedRow.id}/posts`;
-  // const todoUrl = `https://jsonplaceholder.typicode.com/users/${selectedRow.id}/todos`;
-  // const albumUrl = `https://jsonplaceholder.typicode.com/users/${selectedRow.id}/albums`;
-
-
-  // const getPostList = () => {
-  //   axios
-  //     .get(postUrl)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setPost(res.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally();
-  // };
-
-  // const getTodoList = () => {
-  //   axios
-  //     .get(todoUrl)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setTodo(res.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally();
-  // };
-  // const getAlbumList = () => {
-  //   axios
-  //     .get(albumUrl)
-  //     .then((res) => {
-  //       console.log(res);
-  //       setAlbum(res.data);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally();
-  // };
-
   useEffect(() => {
     const getPostList = () => {
       axios
@@ -172,13 +133,10 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
     getTodoList();
     getAlbumList();
   }, [selectedRow]);
-
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   return (
-    
     <Modal
         open={open}
         onClose={onClose}
@@ -201,7 +159,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
               />
             </CardMedia>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        
               <CardContent sx={{ flex: '1 0 auto' }}>
                 <Typography component="div" variant="h5">
                 {selectedRow.name}
@@ -217,11 +174,8 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                 , Lat: {selectedRow.address.geo.lat}, Lng: {selectedRow.address.geo.lng} 
                 </Typography>
               </CardContent>
-
             </Box>
-
           </Card>
-         
 
           <Box sx={{ borderBottom: 1, borderColor: 'divider',width: "100%", display: "table", tableLayout: "fixed"  }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -229,7 +183,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                 <Tab label="TODOS" {...a11yProps(1)} />
                 <Tab label="ALBUMS" {...a11yProps(2)} />
               </Tabs>
-          
             <CustomTabPanel value={value} index={0}>
               <Paper sx={{ width: '100%', height: '100%' }}>
                 <TableContainer sx={{fontSize: 2, fontFamily: 'sans-serif'}}>
@@ -240,9 +193,7 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                           <TableCell key={column.id}>
                             {column.name}
                           </TableCell>
-                        
                         ))}
-
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -259,7 +210,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                                     return <TableCell key={value}>{value}</TableCell>;
                                   })}
                               </TableRow>
-
                             );
                           })}
                     </TableBody>
@@ -287,9 +237,7 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                             <TableCell key={column.id}>
                               {column.name}
                             </TableCell>
-                          
                           ))}
-
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -306,7 +254,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                                       return <TableCell key={value}>{(String (value))}</TableCell>;
                                     })}
                                 </TableRow>
-
                               );
                             })}
                       </TableBody>
@@ -333,9 +280,7 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                             <TableCell key={column.id}>
                               {column.name}
                             </TableCell>
-                          
                           ))}
-
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -352,7 +297,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                                       return <TableCell key={value}>{value}</TableCell>;
                                     })}
                                 </TableRow>
-
                               );
                             })}
                       </TableBody>
@@ -368,7 +312,6 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
                     onRowsPerPageChange={handleRowsPerPage}
                   ></TablePagination>
                 </Paper>   
-                          
             </CustomTabPanel>
           </Box>
         </Box>

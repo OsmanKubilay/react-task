@@ -1,20 +1,15 @@
 import * as React from 'react';
 import {useEffect, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import SupervisedUserCircleSharpIcon from '@mui/icons-material/SupervisedUserCircleSharp';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
-
-import './dashboard.css'
+import axios from "axios";
 import UserDetailForm from './formModal/userDetailForm';
+import Navbar from './components/Navbar'
+
 
 interface Column {
   id: string;
   name: string;
 }
-
 
 function Dashboard() {
   const [open, setOpen] = useState<boolean>(false);
@@ -48,95 +43,72 @@ function Dashboard() {
   const [rowperpage, rowperpagechange] = useState(5);
 
 useEffect(() => {
-  fetch("https://jsonplaceholder.typicode.com/users")
-  .then(resp => {return resp.json();})
-  .then(resp => {rowchange(resp);})
-  .catch(e => {console.log(e.message)})
+  const getUserList = () => {
+    axios
+      .get(`https://jsonplaceholder.typicode.com/users`)
+      .then((res) => {
+        console.log(res);
+        rowchange(res.data);
+      })
+      .catch((err) => console.log(err))
+      .finally();
+  };
+
+  getUserList();
 }, [])
 
 
   return (
     <div className='content'>
-      <div className='navbar'>
-      <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <SupervisedUserCircleSharpIcon/>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Şehir Işıkları
-          </Typography>
-    
-        </Toolbar>
-      </Container>
-    </AppBar>
-    </div>
-   
-    <div style={{ textAlign: 'center' }}>
-      <h1>User List</h1>
-
-      <Paper sx={{ width: '90%', marginLeft: '5%' }}>
-        <TableContainer sx={{ maxHeight: 450 }}>
-          <Table stickyHeader>
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell key={column.id}>
-                    {column.name}
-                  </TableCell>
-                
-                ))}
-
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows &&
-                rows
-                  .slice(page * rowperpage, page * rowperpage + rowperpage)
-                  .map((row, i) => {
-                    return (
-                      <TableRow key={i}
-                      onClick={() => handleModal(row)}
-                      sx={{ cursor: 'pointer' }}
-                      >
-                        {columns &&
-                          columns.map((column, i) => {
-                            let value = row[column.id];
-                            return <TableCell key={value}>{value}</TableCell>;
-                          })}
-                      </TableRow>
-
-                    );
-                  })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          rowsPerPage={rowperpage}
-          page={page}
-          count={rows.length}
-          component="div"
-          onPageChange={handlechangepage}
-          onRowsPerPageChange={handleRowsPerPage}
-        ></TablePagination>
-      </Paper>
-    </div>
-      {selectedRow  && <UserDetailForm selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
-      }    
+      <Navbar/>
+        <div style={{ textAlign: 'center' }}>
+          <h1>User List</h1>
+          <Paper sx={{ width: '90%', marginLeft: '5%' }}>
+            <TableContainer sx={{ maxHeight: 450 }}>
+              <Table stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                      <TableCell key={column.id}>
+                        {column.name}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows &&
+                    rows
+                      .slice(page * rowperpage, page * rowperpage + rowperpage)
+                      .map((row, i) => {
+                        return (
+                          <TableRow key={i}
+                          onClick={() => handleModal(row)}
+                          sx={{ cursor: 'pointer' }}
+                          >
+                            {columns &&
+                              columns.map((column, i) => {
+                                let value = row[column.id];
+                                return <TableCell key={value}>{value}</TableCell>;
+                              })}
+                          </TableRow>
+                        );
+                      })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPage={rowperpage}
+              page={page}
+              count={rows.length}
+              component="div"
+              onPageChange={handlechangepage}
+              onRowsPerPageChange={handleRowsPerPage}
+            ></TablePagination>
+          </Paper>
+        </div>
+        {selectedRow  && <UserDetailForm selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
+        }    
     </div>
 
   );
