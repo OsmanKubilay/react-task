@@ -4,6 +4,7 @@
 </p>
 
 > Project displays a list of users fetched from JSONPlaceholder(https://jsonplaceholder.typicode.com)
+> Click on the user's name for details.
 
 ## Install
 
@@ -15,12 +16,6 @@ npm install --force
 
 ```sh
 npm start
-```
-
-## Run tests
-
-```sh
-npm run test
 ```
 
 ## Author

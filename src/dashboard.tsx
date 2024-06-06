@@ -15,7 +15,6 @@ function Dashboard() {
   const [open, setOpen] = useState<boolean>(false);
 
   const [selectedRow, setSelectedRow] = useState(null);
-  // const [modalOpen, setModalOpen] = useState({});
 
   const columns: Column[] = [
     { id: 'id', name: 'Id' },
