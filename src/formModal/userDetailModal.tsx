@@ -64,7 +64,7 @@ function a11yProps(index: number) {
 }
 
 
-const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
+const UserDetailModal :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
 
   const postColumns: Column[] = [
     { id: 'id', name: 'Id' },
@@ -319,4 +319,4 @@ const UserDetailForm :React.FC<propTypes> = ({open, onClose, selectedRow}) => {
     )
 }
 
-export default UserDetailForm
+export default UserDetailModal

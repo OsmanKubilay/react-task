@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect, useState } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import axios from "axios";
-import UserDetailForm from './formModal/userDetailForm';
+import UserDetailModal from './formModal/userDetailModal';
 import Navbar from './components/Navbar'
 
 
@@ -106,7 +106,7 @@ useEffect(() => {
             ></TablePagination>
           </Paper>
         </div>
-        {selectedRow  && <UserDetailForm selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
+        {selectedRow  && <UserDetailModal selectedRow={selectedRow} open={open} onClose={()=>setOpen(false)}/>
         }    
     </div>
 
